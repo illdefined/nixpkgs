@@ -561,6 +561,13 @@
           <link xlink:href="options.html#opt-services.prometheus.exporters.smartctl.enable">services.prometheus.exporters.smartctl</link>.
         </para>
       </listitem>
+      <listitem>
+        <para>
+          <link xlink:href="https://github.com/NicolasConstant/BirdsiteLive">BirdsiteLIVE</link>,
+          a Twitter to ActivityPub bridge. Available as
+          <link linkend="opt-services.birdsitelive.enable">services.birdsitelive</link>.
+        </para>
+      </listitem>
     </itemizedlist>
   </section>
   <section xml:id="sec-release-21.11-incompatibilities">
