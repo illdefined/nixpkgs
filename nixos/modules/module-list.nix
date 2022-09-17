@@ -755,6 +755,7 @@
   ./services/networking/autossh.nix
   ./services/networking/bird.nix
   ./services/networking/bird-lg.nix
+  ./services/networking/birdsitelive.nix
   ./services/networking/bitlbee.nix
   ./services/networking/blockbook-frontend.nix
   ./services/networking/blocky.nix
