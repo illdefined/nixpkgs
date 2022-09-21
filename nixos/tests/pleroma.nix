@@ -23,7 +23,7 @@
     secret. **DO NOT DO THIS IN A REAL WORLD DEPLOYMENT**.
 */
 
-import ./make-test-python.nix ({ pkgs, ... }:
+import ./make-test-python.nix ({ pkgs, pleromaPackage ? pkgs.pleroma, ... }:
   let
   send-toot = pkgs.writeScriptBin "send-toot" ''
     set -eux
@@ -196,6 +196,7 @@ import ./make-test-python.nix ({ pkgs, ... }:
       services = {
         pleroma = {
           enable = true;
+          package = pleromaPackage;
           configs = [
             pleroma-conf
           ];
