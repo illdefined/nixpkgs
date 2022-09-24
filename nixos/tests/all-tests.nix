@@ -35,6 +35,7 @@ in {
   agate = handleTest ./web-servers/agate.nix {};
   agda = handleTest ./agda.nix {};
   airsonic = handleTest ./airsonic.nix {};
+  akkoma = handleTestOn [ "x86_64-linux" "aarch64-linux" ] ./akkoma.nix {};
   allTerminfo = handleTest ./all-terminfo.nix {};
   amazon-init-shell = handleTest ./amazon-init-shell.nix {};
   apfs = handleTest ./apfs.nix {};

@@ -3,6 +3,7 @@
 , fetchFromGitea, fetchFromGitHub, fetchFromGitLab
 , cmake, file
 , writeText
+, nixosTests
 , ...
 }:
 
@@ -197,6 +198,11 @@ beamPackages.mixRelease rec {
         '';
       };
     });
+  };
+
+  passthru = {
+    tests.akkoma = nixosTests.akkoma;
+    inherit mixNixDeps;
   };
 
   meta = with lib; {
