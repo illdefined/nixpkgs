@@ -605,7 +605,12 @@ rec {
 
         check = x:
           let
-            isInStore = builtins.match "${builtins.storeDir}/[^.].*" (toString x) != null;
+            # The second branch of this regular expression matches content‐
+            # addressed derivations, which _currently_ do not have a store
+            # directory prefix.
+            # This is a workaround for https://github.com/NixOS/nix/issues/12361
+            # and should be removed once the issue has been resolved.
+            isInStore = builtins.match "(${builtins.storeDir}|/[0-9a-z]{52})/[^.].*" (toString x) != null;
             isAbsolute = builtins.substring 0 1 (toString x) == "/";
             isExpectedType = (
               if inStore == null || inStore then
