@@ -1,7 +1,7 @@
 { stdenv, lib }:
 
 let
-  inherit (lib) findFirst isString optional optionals;
+  inherit (lib) boolToString cmakeOptionType findFirst isString mapAttrsToList optional optionals;
 
   cmakeFlags' =
     optionals (stdenv.hostPlatform != stdenv.buildPlatform) ([
@@ -26,7 +26,11 @@ let
       "-DCMAKE_LINK_SEARCH_START_STATIC=ON"
     ]);
 
-  makeCMakeFlags = { cmakeFlags ? [ ], ... }: cmakeFlags ++ cmakeFlags';
+  cmakeFlagsFromAttrs = mapAttrsToList (feature: value: cmakeOptionType (builtins.typeOf value) feature
+    (if builtins.isBool value then boolToString value else toString value));
+
+  makeCMakeFlags = { cmakeAttrs ? { }, cmakeFlags ? [ ], ... }:
+    (cmakeFlagsFromAttrs cmakeAttrs) ++ cmakeFlags ++ cmakeFlags';
 
 in
 {
