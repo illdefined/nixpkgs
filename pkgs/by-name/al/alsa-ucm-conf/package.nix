@@ -1,6 +1,6 @@
 {
-  directoryListingUpdater,
-  fetchurl,
+  nix-update-script,
+  fetchFromGitHub,
   lib,
   stdenvNoCC,
   coreutils,
@@ -9,11 +9,13 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "alsa-ucm-conf";
-  version = "1.2.15.1";
+  version = "1.2.15.3-unstable-2026-01-29";
 
-  src = fetchurl {
-    url = "mirror://alsa/lib/alsa-ucm-conf-${finalAttrs.version}.tar.bz2";
-    hash = "sha256-JGxdWdIXtvf0ehH9EPG3ZtJavLDZyZavMHm7nJrFobA=";
+  src = fetchFromGitHub {
+    owner = "alsa-project";
+    repo = "alsa-ucm-conf";
+    rev = "4b0668f670409e13f98ffa6ee434bac886212762";
+    hash = "sha256-CbgYe2/CTFBcjEdiJx+eVFIOmLwQRiPH47HdYbSvn3M=";
   };
 
   dontBuild = true;
@@ -37,8 +39,8 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
-  passthru.updateScript = directoryListingUpdater {
-    url = "https://www.alsa-project.org/files/pub/lib/";
+  passthru.updateScript = nix-update-script {
+    extraArgs = [ "--version=branch" ];
   };
 
   meta = {
