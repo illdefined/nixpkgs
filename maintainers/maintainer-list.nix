@@ -12592,10 +12592,10 @@
     name = "kintrix";
   };
   kinzoku = {
-    email = "kinzoku@the-nebula.xyz";
-    github = "kinzoku-dev";
+    email = "kira@renec88.xyz";
+    github = "kinzokudev";
     githubId = 140647311;
-    name = "Ayman Hamza";
+    name = "Kira Rene";
   };
   kip93 = {
     name = "Leandro Reina Kiperman";
