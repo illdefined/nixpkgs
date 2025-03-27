@@ -4,14 +4,14 @@
   lib,
 }:
 
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "xcp";
   version = "0.23.1";
 
   src = fetchFromGitHub {
     owner = "tarka";
     repo = "xcp";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-LtIPuktZYl3JdudsiOtOumR7omF9u5Z4lR1+a2W4qiI=";
   };
 
@@ -28,4 +28,4 @@ rustPlatform.buildRustPackage rec {
     maintainers = with maintainers; [ lom ];
     mainProgram = "xcp";
   };
-}
+})
