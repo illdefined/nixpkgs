@@ -127,11 +127,41 @@
     };
   } ./maturin-build-hook.sh;
 
-  bindgenHook = makeSetupHook {
-    name = "rust-bindgen-hook";
+  cargoCBuildHook = makeSetupHook {
+    name = "cargo-c-build-hook.sh";
+    propagatedBuildInputs = [
+      pkgsHostTarget.cargo
+      pkgsHostTarget.cargo-c
+    ];
     substitutions = {
-      libclang = (lib.getLib clang.cc);
-      inherit clang;
+      inherit (stdenv.targetPlatform.rust) rustcTarget;
+      inherit (rust.envVars) setEnv;
+      libraryType = if stdenv.targetPlatform.hasSharedLibraries then "cdylib" else "staticlib";
     };
-  } ./rust-bindgen-hook.sh;
+  } ./cargo-c-build-hook.sh;
+
+  cargoCCheckHook = makeSetupHook {
+    name = "cargo-c-check-hook.sh";
+    propagatedBuildInputs = [
+      pkgsHostTarget.cargo
+      pkgsHostTarget.cargo-c
+    ];
+    substitutions = {
+      inherit (stdenv.targetPlatform.rust) rustcTarget;
+      inherit (rust.envVars) setEnv;
+    };
+  } ./cargo-c-check-hook.sh;
+
+  cargoCInstallHook = makeSetupHook {
+    name = "cargo-c-install-hook.sh";
+    propagatedBuildInputs = [
+      pkgsHostTarget.cargo
+      pkgsHostTarget.cargo-c
+    ];
+    substitutions = {
+      inherit (stdenv.targetPlatform.rust) rustcTarget;
+      inherit (rust.envVars) setEnv;
+      libraryType = if stdenv.targetPlatform.hasSharedLibraries then "cdylib" else "staticlib";
+    };
+  } ./cargo-c-install-hook.sh;
 }

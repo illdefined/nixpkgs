@@ -71,6 +71,9 @@
         cargoSetupHook
         maturinBuildHook
         bindgenHook
+        cargoCBuildHook
+        cargoCCheckHook
+        cargoCInstallHook
         ;
     };
 })
